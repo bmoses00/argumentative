@@ -1,23 +1,21 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
+# include <stdlib.h>
 
-char ** parse_args( char * line ) {
-	line = calloc(100, 1);
-	char * curr = line;
-	char * args[8];	
+char ** parse_args(char * line) {
+	char ** args = calloc(48, 1);
 	int i;
-	for (i = 0; curr != NULL; i++) {
-		args[i] = strsep(&curr, " ");
+	for (i = 0; line != NULL; i++) {
+		args[i] = calloc(8, 1);
+		args[i] = strsep(&line, " ");
 	}
-	return pointer to original thing
+	args[i] = NULL;
+	return args;
 }
-
 
 int main(int argc, char * argv[]) {
-  char ** line = parse_args("ls -a -l");
-  
-  execvp(args[0], args);
+  char ** args = parse_args(argv[1]);
+	int i;
+	execvp(args[0], args);
 }
-
-
